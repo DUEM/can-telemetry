@@ -1,0 +1,355 @@
+{
+    "0x111": [
+        {
+            "name": "System status messages",
+            "source": "TelemetryStatus",
+            "structure": ["uint8","uint8","uint8","uint8","uint8","uint8","uint8","uint8"],
+            "fields": ["stat_pwr","stat_sd","stat_gps","stat_conf","stat_flag","spare2","spare3","spare4"],
+            "labels": ["Power", "Writing to SD","GPS Time Obtained","Config","Flag","spare2","spare3","spare4"],
+            "version_comment": "2021-11-03"
+        }
+    ],
+    "0x112": [
+        {
+            "name": "Example binary system status message",
+            "source": "TelemetryStatus",
+            "structure": ["uint8_notInUse"],
+            "fields": ["zReserved"],
+            "labels": ["Reserved"],
+            "nested_data" : {
+                "Uin_Y": {
+                    "nd_structure": ["b1","b1","b1","b1","b1","X3"],
+                    "nd_fields": ["stat_pwr","stat_sd","stat_gps","stat_conf","stat_flag"],
+                    "nd_labels": ["Battery Voltage Level Reached Flag","Overtemperature Flag", "No Charge Flag", "Undervoltage Flag"]
+                }
+            }
+        }
+    ],
+    "0x501": [
+        {
+            "name": "Speed and Current Setting",
+            "source": "Driver Controls",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["drv_vel","drv_curr"],
+            "labels": ["Driver Set Speed","Driver Set Current"],
+            "multiplier": [3.6,100],
+            "units": ["kmh", "%"]
+        }
+    ],
+    "0x502": [
+        {
+            "name": "BusCurrent",
+            "source": "Driver Controls",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["zReserved","max_curr"],
+            "labels": ["Reserved","Max Bus Current"],
+            "multiplier": [3.6,100],
+            "units": ["none", "%"]
+        }
+    ],
+    "0x600": [
+        {
+            "name": "Identification Information",
+            "source": "Tritium",
+            "structure": ["int32","int32"],
+            "fields": ["id","s_n"],
+            "labels": ["Tritium ID","Serial Number"]
+        }
+    ],
+    "0x601": [
+        {
+            "name": "Status Information",
+            "source": "Tritium",
+            "structure": ["uint16","uint16","uint16"],
+            "fields": ["LimitFlag","ErrorFlag","activeMotor"],
+            "labels": ["Limit Flags","Error Flags","Active Motor"]
+        }
+    ],
+    "0x602": [
+        {
+            "name": "Bus Measurement",
+            "source": "Tritium",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["busVoltage","busCurrent"],
+            "labels": ["Bus Voltage","Bus Current"],
+            "units": ["V","A"]
+        }
+    ],
+    "0x603": [
+        {
+            "name": "Velocity",
+            "source": "Tritium",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["motVel","vehVel"],
+            "labels": ["Motor Velocity","Vehicle Velocity"],
+            "multiplier": [1, 3.6],
+            "units": ["RPM","kmh"]
+
+        }
+    ],
+    "0x604": [
+        {
+            "name": "Phase Current",
+            "source": "Tritium",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["phBCurrent","phACurrent"],
+            "labels": ["Phase B Current","Phase A Current"],
+            "units": ["A_rms","A_rms"]
+        }
+    ],
+    "0x605": [
+        {
+            "name": "Motor Voltage Vector",
+            "source": "Tritium",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["vectVoltImag","vectVoltReal"],
+            "labels": ["Motor Imaginary Voltage","Motor Real Voltage"],
+            "units": ["V","V"]
+        }
+    ],
+    "0x606": [
+        {
+            "name": "Motor Current Vector",
+            "source": "Tritium",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["vectCurrentImag","vectCurrentReal"],
+            "labels": ["Motor Imaginary Current","Motor Real Current"],
+            "units": ["A","A"]
+        }
+    ],
+    "0x607": [
+        {
+            "name": "Motor Back EMF Vector",
+            "source": "Tritium",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["backEMFImag","backEMFReal"],
+            "labels": ["Imaginary Back EMF","Real Back EMF"],
+            "units": ["V","V"]
+        }
+    ],
+    "0x608": [
+        {
+            "name": "15 & 1.65 Volt Rail",
+            "source": "Tritium",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["Vrail01-65","Vrail15"],
+            "labels": ["1.65V Rail","15V Rail"],
+            "units": ["V","V"]
+        }
+    ],
+    "0x609": [
+        {
+            "name": "2.5 & 1.2 Volt Rail",
+            "source": "Tritium",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["Vrail01-2","Vrail02-5"],
+            "labels": ["1.2V Rail","2.5V Rail"],
+            "units": ["V","V"]
+        }
+    ],
+    "0x60A": [
+        {
+            "name": "Fan Speed",
+            "source": "Tritium",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["fanDrive","fanSpeed"],
+            "labels": ["Fan Drive","Fan Speed"],
+            "multiplier": [100,1],
+            "units": ["%","RPM"]
+        }
+    ],
+    "0x60B": [
+        {
+            "name": "Sink & Motor Temp",
+            "source": "Tritium",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["motorTemp","heatSinkTemp"],
+            "labels": ["Motor Temperature","Heat Sink Temperature"],
+            "units": ["oC","oC"]
+        }
+    ],
+    "0x60C": [
+        {
+            "name": "Air In & CPU Temp",
+            "source": "Tritium",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["cpuTemp","airInTemp"],
+            "labels": ["CPU Temperature","Air Inlet Temperature"],
+            "units": ["oC","oC"]
+        }
+    ],
+    "0x60D": [
+        {
+            "name": "Air Out & Cap Temp",
+            "source": "Tritium",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["capTemp","airOutTemp"],
+            "labels": ["Air Outlet Temperature","Capacitor Temperature"]
+        }
+    ],
+    "0x60E": [
+        {
+            "name": "Odo. & Bus AmpHours",
+            "source": "Tritium",
+            "structure": ["float32LE","float32LE"],
+            "fields": ["odometer","busAmpHr"],
+            "labels": ["Odometer","Bus Amp Hours"],
+            "units": ["m","Ah"]
+        }
+    ],
+    "0x700": [
+        {
+            "name": "BMS Message",
+            "source": "Orion",
+            "structure": ["uint16","uint16","uint16"],
+            "fields": ["maxCellV","minCellV","avgCellV"],
+            "labels": ["Max Cell Voltage","Min Cell Voltage","Average Cell Voltage"],
+            "multiplier": [0.0001, 0.0001, 0.0001],
+            "units": ["V","V","V"]
+        }
+    ],
+    "0x701": [
+        {
+            "name": "Cell Temp, Charge & Discharge Limit",
+            "source": "Orion",
+            "structure": ["int8","int8","int8","uint8","uint8","uint8"],
+            "fields": ["cellTempMax","cellTempMin","cellTempAvg","packDCL","packCCL","currState"],
+            "labels": ["Max Cell Temp","Min Cell Temp","Avg Cell Temp","Discharge Current Limit","Charge Current Limit","Current state?"]
+        }
+    ],
+    "0x702": [
+        {
+            "name": "BMS Message",
+            "source": "Orion",
+            "structure": ["int16","uint16","uint16","uint8","uint8"],
+            "fields": ["packCurr","packVolt","packSumVolt","packSoC","relay_state"],
+            "labels": ["Pack Current","Pack Voltage","Pack Sum. Voltage","SoC","Relay State"],
+            "multiplier" : [0.1,0.1,0.01,0.5,1]
+        }
+    ],
+    "0x771": [
+        {
+            "name": "MPPT1",
+            "source": "MPPT1",
+            "structure": ["uint16ten_ND","uint16ten","uint16ten","int8"],
+            "fields": ["Uin_Y","Iin","Uout","ambient_temp"],
+            "labels": ["Input Voltage","Input MPPT Current","Output Voltage","Ambient Temperature"],
+            "multiplier" : [0.15049, 0.20879,0.00872,1],
+            "nested_data" : {
+                "Uin_Y": {
+                    "nd_structure": ["b1","b1","b1","b1","X4"],
+                    "nd_fields": ["bvlr","ovt","noc","undv"],
+                    "nd_labels": ["Battery Voltage Level Reached Flag","Overtemperature Flag", "No Charge Flag", "Undervoltage Flag"]
+                }
+            }
+        }
+    ],
+        "0x772": [
+        {
+            "name": "MPPT2",
+            "source": "MPPT2",
+            "structure": ["uint16ten_ND","uint16ten","uint16ten","int8"],
+            "fields": ["Uin_Y","Iin","Uout","ambient_temp"],
+            "labels": ["Input Voltage","Input MPPT Current","Output Voltage","Ambient Temperature"],
+            "multiplier" : [0.15049, 0.20879,0.00872,1],
+            "nested_data" : {
+                "Uin_Y": {
+                    "nd_structure": ["b1","b1","b1","b1","X4"],
+                    "nd_fields": ["bvlr","ovt","noc","undv"],
+                    "nd_labels": ["Battery Voltage Level Reached Flag","Overtemperature Flag", "No Charge Flag", "Undervoltage Flag"]
+                }
+            }
+        }
+    ],
+    "0x123": [
+        {
+            "name": "Serial Tester Spoof Message",
+            "source": "Test Messages",
+            "structure": ["uint8","uint8"],
+            "fields": ["testVal","compTestVal"],
+            "labels": ["Test 1","Test 2"]
+        }
+    ],
+    "0x1B1": [
+        {
+            "name": "Temp and humidity",
+            "source": "Test Messages",
+            "structure": ["float32","float32"],
+            "fields": ["temperature","humidity"],
+            "labels": ["Temperature (oC)","Humidity (%)"]
+        }
+    ],
+    "0x1B2": [
+        {
+            "name": "Heat index and LDR",
+            "source": "Test Messages",
+            "structure": ["float32","int32"],
+            "fields": ["heatindex","ldr"],
+            "labels": ["Feels like (oC)","Light (%)"]
+        }
+    ],
+    "0xF6": [
+        {
+            "name": "Date and time",
+            "source": "GPS",
+            "structure": ["uint8","uint8","uint8","uint8","uint8","uint8","uint8","uint8"],
+            "fields": ["hour","minute","second","year","month","day","fix","quality"],
+            "labels": ["hour","minute","second","year","month","day","fix","quality"]
+        }
+    ],
+    "0xF7": [
+        {
+            "name": "Speed and angle",
+            "source": "GPS",
+            "structure": ["float32","float32"],
+            "fields": ["speed","angle"],
+            "labels": ["Speed","Angle"],
+            "units": ["kmh", "Deg"],
+            "multiplier": [1.852, 1]
+        }
+    ],
+    "0xF8": [
+        {
+            "name": "Latitude",
+            "source": "GPS",
+            "structure": ["float32","uint8"],
+            "fields": ["latitude","lat"],
+            "labels": ["latitude","lat"]
+        }
+    ],
+    "0xF9": [
+        {
+            "name": "Longitude",
+            "source": "GPS",
+            "structure": ["float32","uint8"],
+            "fields": ["longitude","lon"],
+            "labels": ["longitude","lon"]
+        }
+    ],
+    "0xFA": [
+        {
+            "name": "Alti and sats",
+            "source": "GPS",
+            "structure": ["float32","uint8"],
+            "fields": ["altitude","sats"],
+            "labels": ["Altitude","Number of satellites"]
+        }
+    ],
+    "0x987": [
+        {
+            "name": "Test Message",
+            "source": "Test",
+            "structure": ["uint16ten_ND","uint16ten","uint16ten","int8"],
+            "fields": ["A_Y","B","C","D"],
+            "labels": ["A","B","C","D"],
+            "multiplier" : [1,-1,0.1,1],
+            "nested_data" : {
+                "A_Y": {
+                    "nd_structure": ["b1","b1","b1","b1","X4"],
+                    "nd_fields": ["a1","a2","a3","a4"],
+                    "nd_labels": ["a1","a2","a3","a4"]
+                }
+            }
+        }
+    ]
+}
