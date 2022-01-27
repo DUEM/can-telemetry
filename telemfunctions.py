@@ -22,13 +22,11 @@ useMultiplier = True    # Multipliers may be specified in the CAN configuration 
 CANFILE = 'config/recv_conf.json'
 
 # influx configuration - edit these
-ifuser = "grafana"
+ifuser = "<username>"
 ifpass = "<yourpassword>"
 ifdb   = "home"
 ifhost = "127.0.0.1"
 ifport = 8086
-ifdb   = "solartest"
-ifhost = "192.168.1.107"
 
 ifclient = InfluxDBClient(ifhost,ifport,ifuser,ifpass,ifdb)
 
