@@ -1,7 +1,7 @@
 #### CUSTOM
 .DS_Store
 *.csv
-# *.txt
+*.txt
 
 #### VSCODE
 .vscode/*
