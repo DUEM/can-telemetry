@@ -32,8 +32,7 @@ In any case, the system time is stored in the CAN message timestamp.
 
 
 ## Notes/Future Work
-1. At the moment `parse_msg` decodes the CAN message *and* stores it as and when a field is found. Perhaps would be better to return a json list or something of all the fields and values in the message to then be stored later. (eg the Influx `body` json)
-1. The arguments for `parse_msg` and `store_result` could do with tidying up, although this could be dealt with by sorting the above.
+1. At the moment `parse_msg` decodes the CAN message *and* stores it as and when a field is found. Perhaps would be better to return a json list or something of all the fields and values in the message to then be stored later in the code. (eg the Influx `body` json)
+1. The arguments for `parse_msg` and `store_result` could do with tidying up, although this could be dealt with by sorting the above point.
 1. Ensure cross compatibility between `last_gps_time` and the Raspberry Pi system time so either can be stored in Influx of CSV.
 1. Would be nice to record each time `check_crc` fails to Influx or CSV.
-1. Can probably get rid of `new_data` in [live-telem.py](live-telem.py).
