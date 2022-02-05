@@ -2,6 +2,9 @@
 .DS_Store
 *.csv
 *.txt
+# Make sure sample log file and Arduino config file are exempt
+!sample.txt 
+!config.txt
 
 #### VSCODE
 .vscode/*

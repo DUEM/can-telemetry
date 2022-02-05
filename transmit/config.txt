@@ -1,0 +1,9 @@
+{
+    "gps_update":2000,
+    "sd_update":2000,
+    "status_update":500,
+    "mppt_update":1000,
+    "time_fix":30000,
+    "serialCanMsg":1,
+    "spare":[1.2,3.4]
+}

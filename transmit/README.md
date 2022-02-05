@@ -35,7 +35,7 @@ The following need to be installed:
 ## Features
 
 ### Configuration
-The following parameters are defined by the `config.txt` file on the microSD card. If reading or parsing the file is unsuccessful, default values are used.
+The following parameters are defined by the [config.txt](config.txt) file on the microSD card. If reading or parsing the file is unsuccessful, default values are used.
 
 | Variable name | Default Value | Description   |
 | ------------- | ------------- | ------------- |
@@ -44,6 +44,7 @@ The following parameters are defined by the `config.txt` file on the microSD car
 | `status_update` | 500 ms      | Interval at which system status is sent and logged |
 | `time_fix`    | 10000 ms      | Time out to acquire GPS fix                   |
 | `mppt_update` | 1000 ms       | MPPT poll update rate                         |
+| `serialCanMsg`| 1             | Provides option to echo data sent to XBee over USB serial (uses `.print()` not `.write()`) |
 
 The `spare` field is also included but not used.
 
