@@ -9,7 +9,7 @@
 #define MCP_SS 10
 #define SD_SS 12
 #define SLEEP_INT 33
-#define FLAG_INT 21
+#define FLAG_INT 22
 #define GPSSerial Serial1
 #define XBeeSL Serial2
 
