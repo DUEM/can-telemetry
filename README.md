@@ -1,4 +1,6 @@
 # CAN Telemetry
+Acquisition of telemetry data from a remote CAN network.
+
 ## [Transmit](transmit/)
 * Sniffs CAN messages and sends over UART
 * Adds GPS and system status data as a CAN message
