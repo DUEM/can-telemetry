@@ -74,6 +74,9 @@ def parse_msg(message, last_GPS_time, output_type, logfolder): #, time_types
             offset = 0
             ndx = 0     # Index so we know where we are. Removes issue of multiple identical entries.
 
+            nested_data_expected_counter = 0
+            nested_data_counter = 0
+
             # Go through all the data in the message
             for dataType in structure:
 
@@ -83,10 +86,12 @@ def parse_msg(message, last_GPS_time, output_type, logfolder): #, time_types
 
                 # First deal with any nested data. Removes need to go back on offset later.
                 if var_name.split("_")[-1] == 'Y':  # Looking for _Y in "fields"
-                    if "nested_data" in lookup[can_id][0]:
+                    nested_data_expected_counter += 1
+                    if "nested_data" in lookup[can_id][0]:  # Checks if "nested_data" field exits in recv_conf.json
                         nested_data = lookup[can_id][0]["nested_data"]
                         if var_name in nested_data:
                             #print("Nested data found: %s found" %var_name)
+                            nested_data_counter += 1
                             nd_ndx = 0
                             
                             nd_structure = lookup[can_id][0]["nested_data"][var_name]["nd_structure"]
@@ -111,9 +116,11 @@ def parse_msg(message, last_GPS_time, output_type, logfolder): #, time_types
                                 
                                 else:
                                     print("Invalid nd_type in nd_structure for %s" %can_id)
+                    '''
                     else:
                         print("Warning: field name was flagged with _Y")
                         print("         nested data not found for %s" %can_id)
+                    '''
 
                 # Main data:
                 # Send to the right function for the right data
@@ -169,6 +176,11 @@ def parse_msg(message, last_GPS_time, output_type, logfolder): #, time_types
 
                 # Need to think about how to use other time too for live logging. maybe from CAN message timestamp
                 store_result(last_GPS_time, value, var_name, var_source, output_type, logfolder)#, time_type)
+            
+            if nested_data_expected_counter != nested_data_counter:
+                # Warn if config file suggests we should have found nested data but we haven't
+                print("Warning: a field name was flagged with _Y")
+                print("         nested_data not found in %s config" %can_id)
 
         else:
             print("ID %s not found" %can_id)
