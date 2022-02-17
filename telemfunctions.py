@@ -174,6 +174,25 @@ def parse_msg(message, last_GPS_time, output_type, logfolder): #, time_types
                     
                     last_GPS_time = f'{HH:d}:{mm:02d}:{ss:02d}'
 
+                if can_id == "0xF8":    # Latitude can message
+                    if var_name == "latitude":
+                        latitude = value
+                    elif var_name == "lat":
+                        lat = value
+                        # "lat" is the 2nd to arrive, so convert and store
+                        latitude_deg = dddmm2deg(latitude, lat)
+                        store_result(last_GPS_time, latitude_deg, "latitude_deg", var_source, output_type, logfolder)
+
+                if can_id == "0xF9":    # Longitude can message
+                    if var_name == "longitude":
+                        longitude = value
+                    elif var_name == "lon":
+                        lon = value
+                        # "lat" is the 2nd to arrive, so convert and store
+                        longitude_deg = dddmm2deg(longitude, lon)
+                        store_result(last_GPS_time, longitude_deg, "longitude_deg", var_source, output_type, logfolder)
+
+
                 # Need to think about how to use other time too for live logging. maybe from CAN message timestamp
                 store_result(last_GPS_time, value, var_name, var_source, output_type, logfolder)#, time_type)
             
@@ -293,3 +312,12 @@ def up_uint16ten(data, offset):
 """
 End of unpacking functions
 """
+
+# Converts DDDMM.MMMM GPS coordinates to decimal degrees
+def dddmm2deg(value, direction):
+    DD = value//100
+    MM = value - 100*DD
+    degrees = DD + MM/60
+    if direction == "W" or direction == "S":
+        degrees = -degrees
+    return degrees
