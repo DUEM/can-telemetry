@@ -2,8 +2,8 @@ import serial
 import time
 import telemfunctions as tf
 
-#SERIALPORT = '/dev/ttyACM0' # Raspberry Pi
-SERIALPORT = '/dev/cu.usbmodem14101' # macOS
+SERIALPORT = '/dev/ttyUSB0' # Raspberry Pi
+# SERIALPORT = '/dev/cu.usbmodem14101' # macOS
 BAUD = 115200   # For use with the Xbee
 #BAUD = 9600     # If debugging and using SoftwareSerial on another Arduino (eg Uno) to send the data, must use a lower baud as it can't cope with high datarates
 

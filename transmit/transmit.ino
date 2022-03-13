@@ -100,7 +100,8 @@ void setup() {
     
     /* Start the CAN transceivers */
     mcp2515.reset();
-    mcp2515.setBitrate(CAN_125KBPS); //? mcp2515.setBitrate(CAN_125KBPS,MCP_8MHZ);
+    // mcp2515.setBitrate(CAN_125KBPS); //? 
+    mcp2515.setBitrate(CAN_125KBPS,MCP_8MHZ);
     mcp2515.setNormalMode();
 
     /* System status messages sent as 0x111 */
